@@ -11,6 +11,8 @@ export const ProductoSchema = new mongoose.Schema(
     entrada: { type: Number, default: 0 },
     saldoFinal: { type: Number, default: 0 },
     costoDeVenta: { type: Number, default: 0 },
+    precioVenta: { type: Number, default: 0 },
+    stockMin: { type: Number, default: 0 },
     salidaDeInventario: { type: Number, default: 0 },
     diferencia: { type: Number, default: 0 },
     IsEmpty: { type: Boolean, required: true, default: true },

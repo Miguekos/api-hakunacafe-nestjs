@@ -3,7 +3,7 @@ import { ControlService } from './control.service';
 import { CreateControlDto } from './dto/create-control.dto';
 import { UpdateControlDto } from './dto/update-control.dto';
 
-@Controller('apihakuna/control')
+@Controller(`${process.env.PREFIX}/control`)
 export class ControlController {
   constructor(private readonly controlService: ControlService) {}
 

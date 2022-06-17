@@ -9,6 +9,7 @@ export const InventarioSchema = new mongoose.Schema(
     description: { type: String },
     units: { type: Number, required: true },
     unitPrice: { type: Number, required: true },
+    sellPrice: { type: Number, required: true, default: 0 },
     totalPrice: { type: Number, required: true },
   },
   {

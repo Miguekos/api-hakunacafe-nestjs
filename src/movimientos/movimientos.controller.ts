@@ -3,7 +3,7 @@ import { MovimientosService } from './movimientos.service';
 import { CreateMovimientoDto } from './dto/create-movimiento.dto';
 import { UpdateMovimientoDto } from './dto/update-movimiento.dto';
 
-@Controller('apihakuna/movimientos')
+@Controller(`${process.env.PREFIX}/movimientos`)
 export class MovimientosController {
   constructor(private readonly movimientosService: MovimientosService) {}
 

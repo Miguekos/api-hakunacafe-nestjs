@@ -46,7 +46,7 @@ export class ProductosService {
     return await this.productoModel.findOne(filterSearch);
   }
 
-  async update(id: number, updateProductoDto: UpdateProductoDto): Promise<any> {
+  async update(id: number, updateProductoDto: any): Promise<any> {
     const filterUpdate = { idProducto: id };
     const respUpdateProducto = await this.productoModel.updateOne(
       filterUpdate,

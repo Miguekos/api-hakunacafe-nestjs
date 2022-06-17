@@ -12,7 +12,7 @@ import { CreateProductoDto } from "./dto/create-producto.dto";
 import { UpdateProductoDto } from "./dto/update-producto.dto";
 import { Producto } from "./interfaces/producto.interface";
 
-@Controller("apihakuna/productos")
+@Controller(`${process.env.PREFIX}/productos`)
 export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 

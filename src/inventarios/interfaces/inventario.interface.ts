@@ -6,5 +6,6 @@ export interface Inventario extends Document {
     readonly description: string;
     readonly units: number;
     readonly unitPrice: number;
+    readonly sellPrice: number;
     readonly totalPrice: number;
 }

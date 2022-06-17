@@ -6,12 +6,14 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { ProductosModule } from "./productos/productos.module";
 import { InventariosModule } from "./inventarios/inventarios.module";
-import { ControlModule } from './control/control.module';
-import { MovimientosModule } from './movimientos/movimientos.module';
+import { ControlModule } from "./control/control.module";
+import { MovimientosModule } from "./movimientos/movimientos.module";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require("dotenv").config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb://localhost:27017/hakunacafe", {
+    MongooseModule.forRoot(`${process.env.MONGO_URL}`, {
       useNewUrlParser: true,
     }),
     AuthModule,

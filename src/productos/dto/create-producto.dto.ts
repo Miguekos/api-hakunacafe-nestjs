@@ -7,6 +7,7 @@ export class CreateProductoDto {
   entrada: number;
   saldoFinal: number;
   costoDeVenta: number;
+  precioVenta: number;
   salidaDeInventario: number;
   diferencia: number;
   IsEmpty: boolean;

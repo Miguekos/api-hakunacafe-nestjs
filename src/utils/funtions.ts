@@ -46,6 +46,34 @@ export async function MovementCalc(
   return dataUpdateProducto;
 }
 
-export async function name(params: any) {
-  return "asd";
+export async function MovementCalcNew(
+  createInventarioDto: CreateInventarioDto[]
+): Promise<any> {
+  let saldoInicial = 0;
+  let compras = 0;
+  let ventas = 0;
+  let devolucion = 0;
+  const array = createInventarioDto;
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index];
+    if (element.movement === "0") {
+      saldoInicial = element.units * element.unitPrice + saldoInicial;
+    } else if (element.movement === "1") {
+      ventas = element.units * element.unitPrice + ventas;
+    } else if (element.movement === "2") {
+      compras = element.units * element.unitPrice + compras;
+    } else if (element.movement === "3") {
+      devolucion = element.units * element.unitPrice + devolucion;
+    }
+  }
+
+  return {
+    movimientos: array,
+    compras,
+    ventas,
+    saldoInicial,
+    devolucion,
+    ganancia: ventas - compras - devolucion,
+  };
 }
+

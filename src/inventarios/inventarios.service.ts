@@ -40,6 +40,7 @@ export class InventariosService {
   async create(
     createInventarioDto: CreateInventarioDto
   ): Promise<Inventario | string> {
+    console.log("🚀 ~ file: inventarios.service.ts ~ line 43 ~ InventariosService ~ createInventarioDto", createInventarioDto)
     createInventarioDto["date"] = new Date();
     createInventarioDto["totalPrice"] =
       logicMovement.totalUnitsAndCost(createInventarioDto);
@@ -47,27 +48,56 @@ export class InventariosService {
     const productoDetails = await this.productosService.findOne(
       createInventarioDto.idProducto
     );
-
-    const respDataUpdateProducto = await logicMovement.MovementCalc(
-      createInventarioDto,
+    console.log(
+      "🚀 ~ file: inventarios.service.ts ~ line 50 ~ InventariosService ~ productoDetails",
       productoDetails
     );
 
-    console.log("respDataUpdateProducto", respDataUpdateProducto);
+    // const respDataUpdateProducto = await logicMovement.MovementCalc(
+    //   createInventarioDto,
+    //   productoDetails
+    // );
+
+    // console.log("respDataUpdateProducto", respDataUpdateProducto);
+
+    // if (respUpdateProducto.acknowledged) {
+    //   const respCreateMovement = await this.inventariosModel.create({
+    //     // idI: this.getSequenceNextValue("itemId"),
+    //     ...createInventarioDto,
+    //   });
+    //   console.log("respCreateMovement", respCreateMovement);
+    //   return respCreateMovement;
+    // }
+
+    const respDataUpdateProducto: IProductoUpdate = productoDetails;
+    // let respDataUpdateProducto;
+    respDataUpdateProducto["idProducto"] = createInventarioDto.idProducto;
+    if (createInventarioDto.movement === "0") {
+      respDataUpdateProducto["units"] =
+        Number(productoDetails.units) + Number(createInventarioDto.units);
+    } else if (createInventarioDto.movement === "1") {
+      respDataUpdateProducto["units"] =
+      Number(productoDetails.units) - Number(createInventarioDto.units);
+    } else if (createInventarioDto.movement === "2") {
+      respDataUpdateProducto["units"] =
+      Number(productoDetails.units) + Number(createInventarioDto.units);
+    }
 
     const respUpdateProducto = await this.updateProducto(
       respDataUpdateProducto
     );
     console.log("respUpdateProducto", respUpdateProducto);
-    if (respUpdateProducto.acknowledged) {
-      const respCreateMovement = await this.inventariosModel.create({
-        // idI: this.getSequenceNextValue("itemId"),
-        ...createInventarioDto,
-      });
-      console.log("respCreateMovement", respCreateMovement);
-      return respCreateMovement;
-    }
-    return "no se realizaron cambios";
+
+    const respCreateMovement = await this.inventariosModel.create({
+      // idI: this.getSequenceNextValue("itemId"),
+      ...createInventarioDto,
+    });
+    console.log(
+      "🚀 ~ file: inventarios.service.ts ~ line 75 ~ InventariosService ~ respCreateMovement",
+      respCreateMovement
+    );
+    return respCreateMovement;
+    // return "no se realizaron cambios";
   }
 
   findProducto() {

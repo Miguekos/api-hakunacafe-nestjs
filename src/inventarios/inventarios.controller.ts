@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { InventariosService } from './inventarios.service';
 import { CreateInventarioDto } from './dto/create-inventario.dto';
 import { UpdateInventarioDto } from './dto/update-inventario.dto';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require("dotenv").config();
 
-@Controller('apihakuna/inventarios')
+@Controller(`${process.env.PREFIX}/inventarios`)
 export class InventariosController {
   constructor(private readonly inventariosService: InventariosService) {}
 

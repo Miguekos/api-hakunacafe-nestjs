@@ -10,6 +10,8 @@ export interface Producto extends Document {
   readonly entrada: number;
   readonly saldoFinal: number;
   readonly costoDeVenta: number;
+  readonly precioVenta: number;
+  readonly stockMin: number;
   readonly salidaDeInventario: number;
   readonly diferencia: number;
   readonly IsEmpty: boolean;
